@@ -2,18 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal']);
+Route::get('/', 'PrincipalController')->name('site.index');
+Route::get('/sobrenos', 'SobreNosController')->name('site.sobrenos');
+Route::get('/contato', 'ContatoController')->name('site.contato');
+Route::get('/login', function () {return 'Login';})->name('site.login');
 
-// Página "Sobre nós"
-Route::get('/sobrenos', [\App\Http\Controllers\SobroNosController::class, 'sobrenos']);
+// App
+Route::prefix('/app')->group(function() {
+    Route::get('/clientes', function () {return 'Clientes';})->name('app.clientes');
+    Route::get('/fornecedores', function () {return 'Fornecedores';})->name('app.fornecedores');
+    Route::get('/produtos', function () {return 'Produtos';})->name('app.produtos');
+});
 
-// Página de contato
-Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato']);
-
-
-Route::get('/login', function () {return 'Login';});
-
-Route::get('/clientes', function () {return 'Clientes';});
-
-Route::get('/fornecedores', function () {return 'Fornecedores';});
+Route::get('rota1', function(){}->name('site.rota1'));
+Route::get('rota2', function(){}->name('site.rota2'));
 
